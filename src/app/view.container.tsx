@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function ViewContainer({ locations }: ViewContainerProps) {
     const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+    const [filteredLocationsList, setFilteredLocationsList] = useState<Location[]>(locations);
     const [viewState, setViewState] = useState<ViewState & { width: number; height: number }>({
         longitude: -100.0,
         latitude: 45.0,
@@ -31,11 +32,34 @@ export default function ViewContainer({ locations }: ViewContainerProps) {
             });
         }
     }, [selectedLocation]);
+
+    const handleSearch = (value: string) => {
+        const filteredLocation = locations.filter((location) => {
+            return location.facilityName.toLowerCase().includes(value.toLowerCase()) ||
+            location.monitoringEquipment.toLowerCase().includes(value.toLowerCase()) ||
+            location.operatorCompany.toLowerCase().includes(value.toLowerCase()) ||
+            location.gasType.toLowerCase().includes(value.toLowerCase()) ||
+            location.state.toLowerCase().includes(value.toLowerCase()) ||
+            location.notes.toLowerCase().includes(value.toLowerCase()) ||
+            location.address.toLowerCase().includes(value.toLowerCase()) ||
+            location.country.toLowerCase().includes(value.toLowerCase()) ||
+            location.currentReading.toString().includes(value.toLowerCase()) ||
+            location.alertLevel.toLowerCase().includes(value.toLowerCase()) ||
+            location.facilityType.toLowerCase().includes(value.toLowerCase()) ||
+            location.unit.toLowerCase().includes(value.toLowerCase())
+        });
+        setFilteredLocationsList(filteredLocation);
+    };
+
     return (
         <div>
-            <Header locationsQuantity={locations.length} />
+            <Header 
+                locationsQuantity={locations.length}
+                handleSearch={handleSearch}
+            />
             <div className="flex gap-4 p-4 w-full justify-between h-[calc(100vh-75px)]">
-                <MapView 
+                <MapView
+                    filteredLocationsList={filteredLocationsList}
                     setSelectedLocation={setSelectedLocation} 
                     locations={locations as Location[]} 
                     selectedLocation={selectedLocation} 

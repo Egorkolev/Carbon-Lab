@@ -32,11 +32,12 @@ const getStatusBadge = (status: "normal" | "elevated" | "high") => {
 };
 
 export function MapView({
-    locations,
-    selectedLocation,
+    filteredLocationsList,
     setSelectedLocation,
-    viewState,
+    selectedLocation,
     setViewState,
+    locations,
+    viewState,
 }: MapViewProps) {
     return (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 w-full">
@@ -76,7 +77,7 @@ export function MapView({
                     />
                 </div>
                 <div className="mt-4 pb-10 space-y-2 max-h-[calc(100vh-620px)] overflow-y-auto">
-                    {locations.map((location) => (
+                    {filteredLocationsList.map((location) => (
                         <div
                             onClick={() => setSelectedLocation(location)}
                             key={location.locationId}

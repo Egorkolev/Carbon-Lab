@@ -2,7 +2,12 @@
 import { CheckCircle } from "lucide-react";
 import { Search } from "lucide-react";
 
-export function Header({ locationsQuantity }: { locationsQuantity: number }) {
+interface HeaderProps {
+    locationsQuantity: number;
+    handleSearch: (value: string) => void;
+}
+
+export function Header({ locationsQuantity, handleSearch }: HeaderProps) {
     return (
         <header className="bg-white border-b border-gray-200 px-6 py-4">
             <div className="flex items-center justify-between">
@@ -27,6 +32,7 @@ export function Header({ locationsQuantity }: { locationsQuantity: number }) {
                         <input
                             type="text"
                             placeholder="Search facilities..."
+                            onChange={(e) => handleSearch(e.target.value)}
                             className="text-gray-900 pl-10 pr-4 py-2 w-64 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         />
                     </div>

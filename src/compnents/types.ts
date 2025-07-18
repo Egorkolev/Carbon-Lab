@@ -29,6 +29,7 @@ export interface MapBoxProps {
 }
 
 export interface MapViewProps {
+    filteredLocationsList: Location[],
     locations: Location[],
     selectedLocation: Location | null,
     setSelectedLocation: (location: Location | null) => void,
