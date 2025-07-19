@@ -76,21 +76,21 @@ export function MapView({
                         viewState={viewState}
                     />
                 </div>
-                <div className="mt-4 pb-10 space-y-2 max-h-[calc(100vh-620px)] overflow-y-auto">
+                <div className="mt-4 pb-10 space-y-2 max-h-[calc(100vh-300px)] md:max-h-[calc(100vh-620px)] overflow-y-auto">
                     {filteredLocationsList.map((location) => (
                         <div
                             onClick={() => setSelectedLocation(location)}
                             key={location.locationId}
-                            className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                            className="flex items-center justify-between p-3 gap-2 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
                         >
-                            <div className="flex items-center space-x-3">
+                            <div className="flex gap-1 items-center">
                                 <MapPin
                                     className={`w-4 h-4 ${getStatusColor(
                                         location.alertLevel
                                     )}`}
                                 />
                                 <div>
-                                    <div className="flex items-center space-x-2">
+                                    <div className="flex items-center gap-2">
                                         <span className="text-sm font-medium text-gray-900">
                                             {location.facilityName}
                                         </span>
@@ -103,7 +103,7 @@ export function MapView({
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex items-center space-x-3">
+                            <div className="flex flex-wrap gap-1 items-center">
                                 {getStatusBadge(
                                     location.alertLevel as
                                         | "normal"

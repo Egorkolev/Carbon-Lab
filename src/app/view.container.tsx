@@ -57,21 +57,23 @@ export default function ViewContainer({ locations }: ViewContainerProps) {
                 locationsQuantity={locations.length}
                 handleSearch={handleSearch}
             />
-            <div className="flex gap-4 p-4 w-full justify-between h-[calc(100vh-75px)]">
-                <MapView
-                    filteredLocationsList={filteredLocationsList}
-                    setSelectedLocation={setSelectedLocation} 
-                    locations={locations as Location[]} 
-                    selectedLocation={selectedLocation} 
-                    setViewState={setViewState}
-                    viewState={viewState}
-                />
-                <div className="flex flex-col gap-4 w-full">
-                    <AlertsPanel locations={locations as Location[]} />
+            <div className="flex flex-wrap gap-4 p-4 w-full justify-between">
+                <div className="w-full flex flex-[1_1_500px] md:h-[calc(100vh-100px)]">
+                    <MapView
+                        filteredLocationsList={filteredLocationsList}
+                        setSelectedLocation={setSelectedLocation} 
+                        locations={locations as Location[]} 
+                        selectedLocation={selectedLocation} 
+                        setViewState={setViewState}
+                        viewState={viewState}
+                    />
+                </div>
+                <div className="flex flex-[1_1_500px] flex-col gap-4 w-full md:h-[calc(100vh-100px)]">
                     <MonitoringTable 
                         selectedLocation={selectedLocation}
                         locations={locations as Location[]} 
                     />
+                    <AlertsPanel locations={locations as Location[]} />
                 </div>
             </div>
         </div>
